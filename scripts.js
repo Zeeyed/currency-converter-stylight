@@ -18,3 +18,9 @@ const convertCurrency = (from, to, amount) => {
       return console.log(convertedAmount);
     })
 }
+
+const onChange = () => {
+  const from = document.querySelector('input[name="currency-to"]').value;
+  const to = document.querySelector('input[name="currency-to"]').value;
+  console.log('hhhhh', from)
+}
