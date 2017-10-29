@@ -1,6 +1,6 @@
 // Your JavaScript goes here.
-// function
-// Random selection
+// UTIL FUNCTIONS
+// Random selection from array
 const randomItemFromArray = (array) => array[Math.floor(Math.random() * array.length)];
 const itemFromArrayExceptCurrent = (array, current) => {
   return randomItemFromArray(array.filter((element) => {
@@ -56,7 +56,7 @@ const convertCurrency = (from, to, amount) => {
   })
 }
 
-// get select value
+// get select value from dropdown
 const currencyFromOnChange = () => {
   const selectFromValue = document.getElementById('select-from').value;
   const from = document.querySelector('input[name="amount_from"]').value;
@@ -71,6 +71,7 @@ const currencyToOnChange = () => {
   return selectToValue ? selectToValue : 'EUR';
 }
 
+// On change 
 const onChange = () => {
   const from = document.querySelector('input[name="amount_from"]').value;
   const to = document.querySelector('input[name="currency-to"]').value;
@@ -78,13 +79,12 @@ const onChange = () => {
   const currencyTo = currencyToOnChange();
   if(currencyFrom === currencyTo || isNaN(to)){
     document.getElementById('select-to').value = itemFromArrayExceptCurrent(currencies, currencyFrom);
+    document.getElementById('amount_to').value = '';
   }
   convertCurrency(currencyFrom, currencyTo, from).then((res) => {
-    const currencyTo = document.getElementById('amount_to').value;
-    console.log(currencyTo)
-    if(isNaN(currencyTo)){
-      return document.getElementById('amount_to').value = '';
+    if(!isNaN(res)){
+      return document.getElementById('amount_to').value = res;      
     };
-    return document.getElementById('amount_to').value = res;
+    return document.getElementById('amount_to').value = '';
   });
 }
